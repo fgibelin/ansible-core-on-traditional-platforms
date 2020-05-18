@@ -5,8 +5,8 @@ This is a work in progress on how to deploy CloudBees Core on traditional platfo
 ### 1. Setup your hosts in the hosts.ini file
 
 ### 2. Install CloudBees Core Operations Center
-`ansible-playbook -i hosts.ini install-oc.yml`
+`ansible-playbook -i hosts.ini install-operations-centers.yml`
 
 ### 3. Install CloudBees Core Client Masters
 
-`ansible-playbook -i hosts.ini install-cm.yml`
+`ansible-playbook -i hosts.ini install-client-masters.yml`
