@@ -25,7 +25,7 @@
 
   - name: Import the GPG key of the repository
     rpm_key:
-      key: https://downloads.cloudbees.com/jenkins-operations-center/rolling/rpm/cloudbees.com.key
+      key: https://downloads.cloudbees.com/cloudbees-core/traditional/client-master/rolling/rpm/cloudbees.com.key
       state: present
     when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' or ansible_distribution == 'RedHat'
 
