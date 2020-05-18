@@ -1,0 +1,32 @@
+- hosts: operations_center 
+  become: true
+  tasks:
+  - name: Install the prerequisites (wget, JDK8)
+    yum:
+      name: "{{ packages }}"
+      state: latest
+    vars:
+      packages:
+      - wget
+      - java-1.8.0-openjdk.x86_64
+
+  - name: Download and add the package manager repository for the Operations Center
+    get_url:
+      url: https://downloads.cloudbees.com/cloudbees-core/traditional/operations-center/rolling/rpm/cloudbees-core-oc.repo
+      dest: /etc/yum.repos.d/cloudbees-core-oc.repo
+
+  - name: Import the GPG key of the repository
+    rpm_key:
+      state: present
+      key: https://downloads.cloudbees.com/jenkins-operations-center/rolling/rpm/cloudbees.com.key
+
+  - name: Install Cloudbees Core Operations Center
+    yum:
+      name: cloudbees-core-oc
+      state: latest
+
+  - name: Enable and start Cloudbees Core Operations Center service
+    service:
+      name: cloudbees-core-oc
+      enabled: true
+      state: started
