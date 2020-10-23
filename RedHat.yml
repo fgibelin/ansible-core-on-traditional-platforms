@@ -1,0 +1,12 @@
+  ##
+  ## Red Hat Enterprise Linux / CentOS
+  ##
+  - name: Download and add the package manager repository for the Operations Center
+    get_url:
+      url: https://downloads.cloudbees.com/cloudbees-core/traditional/operations-center/rolling/rpm/cloudbees-core-oc.repo
+      dest: /etc/yum.repos.d/cloudbees-core-oc.repo
+
+  - name: Import the GPG key of the repository
+    rpm_key:
+      key: https://downloads.cloudbees.com/jenkins-operations-center/rolling/rpm/cloudbees.com.key
+      state: present
