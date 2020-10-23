@@ -3,7 +3,6 @@
   tasks:
 
   # Install JDK8 and wget
-
   - name: Install the prerequisites (wget, JDK8)
     package:
       name: "{{ packages }}"
@@ -11,49 +10,18 @@
     vars:
       packages:
       - wget
-      - java-1.8.0-openjdk.x86_64
+      - openjdk-8-jdk
 
-  ##
-  ## Red Hat Enterprise Linux / CentOS
-  ##
-
-  - name: Download and add the package manager repository for the Client Master
-    get_url:
-      url: https://downloads.cloudbees.com/cloudbees-core/traditional/client-master/rolling/rpm/cloudbees-core-cm.repo
-      dest: /etc/yum.repos.d/cloudbees-core-cm.repo
-    when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' or ansible_distribution == 'RedHat'
-
-  - name: Import the GPG key of the repository
-    rpm_key:
-      key: https://downloads.cloudbees.com/cloudbees-core/traditional/client-master/rolling/rpm/cloudbees.com.key
-      state: present
-    when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' or ansible_distribution == 'RedHat'
-
-  ##
-  ## Debian / Ubuntu
-  ##
-
-  - name: Import the GPG key of the repository
-    apt_key:
-      key: https://downloads.cloudbees.com/cloudbees-core/traditional/client-master/rolling/debian/cloudbees.com.key
-      state: present
-    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-
-  - name: Download and add the package manager repository for the Client Master
-    apt_repository:
-      repo: deb https://downloads.cloudbees.com/cloudbees-core/traditional/client-master/rolling/debian binary/
-      state: present
-    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  - name: OS package repository configuration for {{ ansible_os_family }}
+    include_tasks: "{{ ansible_os_family }}.yml"
 
   # Install Operations Center package
-
   - name: Install Cloudbees Core Client Master
     package:
       name: cloudbees-core-cm
       state: latest
 
   # Enable the service to startup on boot, and start it
-
   - name: Enable and start Cloudbees Core Client Master service
     service:
       name: cloudbees-core-cm
