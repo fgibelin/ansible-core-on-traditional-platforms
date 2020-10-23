@@ -9,3 +9,4 @@
   - name: Download and add the package manager repository for the Operations Center
     apt_repository:
       repo: deb https://downloads.cloudbees.com/cloudbees-core/traditional/operations-center/rolling/debian binary/
+      state: present
