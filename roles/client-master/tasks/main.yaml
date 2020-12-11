@@ -1,0 +1,16 @@
+# Setup repository
+- name: OS package repository configuration for {{ ansible_os_family }}
+  include_tasks: "{{ ansible_os_family }}.yaml"
+  
+# Install Client Master package
+- name: Install Cloudbees CI Client Master
+  package:
+    name: cloudbees-core-cm
+    state: latest
+
+# Enable the service to startup on boot, and start it
+- name: Enable and start Cloudbees CI Client Master service
+  service:
+    name: cloudbees-core-cm
+    enabled: true
+    state: started
