@@ -1,0 +1,10 @@
+# Debian / Ubuntu
+- name: Import the GPG key of the repository
+  apt_key:
+    url: https://downloads.cloudbees.com/cloudbees-core/traditional/client-master/rolling/debian/cloudbees.com.key
+    state: present
+
+- name: Download and add the package manager repository for the Client Masters
+  apt_repository:
+    repo: deb https://downloads.cloudbees.com/cloudbees-core/traditional/client-master/rolling/debian binary/
+    state: present
