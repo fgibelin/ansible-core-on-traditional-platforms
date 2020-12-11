@@ -1,4 +1,4 @@
-# CloudBees Core on traditional platforms
+# CloudBees CI on traditional platforms
 
 This is a work in progress on how to deploy CloudBees Core on traditional platforms using Ansible
 
@@ -16,3 +16,6 @@ This is a work in progress on how to deploy CloudBees Core on traditional platfo
 Find a way to install JDK8 instead of the default-jre (11) on Debian
 
 Add playbooks for the configuration of the instances
+
+## Full documentation
+https://docs.cloudbees.com/docs/cloudbees-ci/latest/traditional-install-guide/
