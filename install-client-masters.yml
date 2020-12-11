@@ -1,29 +1,5 @@
 - hosts: masters
   become: true
-  tasks:
-
-  # Install JDK8 and wget
-  - name: Install the prerequisites (wget, JDK8)
-    package:
-      name: "{{ packages }}"
-      state: latest
-    vars:
-      packages:
-      - wget
-      - openjdk-8-jdk
-
-  - name: OS package repository configuration for {{ ansible_os_family }}
-    include_tasks: "{{ ansible_os_family }}.yml"
-
-  # Install Operations Center package
-  - name: Install Cloudbees Core Client Master
-    package:
-      name: cloudbees-core-cm
-      state: latest
-
-  # Enable the service to startup on boot, and start it
-  - name: Enable and start Cloudbees Core Client Master service
-    service:
-      name: cloudbees-core-cm
-      enabled: true
-      state: started
+  roles:
+  - common
+  - client-master
