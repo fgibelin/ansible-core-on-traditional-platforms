@@ -1,0 +1,16 @@
+# Setup repository
+- name: OS package repository configuration for {{ ansible_os_family }}
+  include_tasks: "{{ ansible_os_family }}.yaml"
+  
+# Install Operations Center package
+- name: Install Cloudbees CI Operations Center
+  package:
+    name: cloudbees-core-oc
+    state: latest
+
+# Enable the service to startup on boot, and start it
+- name: Enable and start Cloudbees CI Operations Center service
+  service:
+    name: cloudbees-core-oc
+    enabled: true
+    state: started
