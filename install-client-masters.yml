@@ -1,4 +1,4 @@
-- hosts: masters
+- hosts: client_masters
   become: true
   roles:
   - common
