@@ -1,0 +1,14 @@
+# Install JDK8 and wget
+- debug:
+    msg:
+    - "Ansible distribution = {{ ansible_distribution }}"
+    - "Ansible OS family    = {{ ansible_os_family }}"
+
+- name: Install the prerequisites (wget, JDK8)
+  package:
+    name: "{{ packages }}"
+    state: latest
+  vars:
+    packages:
+    - wget
+    - openjdk-8-jdk
